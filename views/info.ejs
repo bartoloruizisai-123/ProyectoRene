@@ -1,0 +1,10 @@
+<%- include("templates/header.ejs") %>
+<h1 class="text-primary">Esto es info</h1>
+
+<% if(c!=0 && texto !="a"){ %>
+<div class="alert alert-primary"><%=c%></div>
+<div class="alert alert-secondary"><%=texto%></div>
+<% } %>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non blanditiis tenetur sapiente delectus, ut dicta nesciunt, necessitatibus earum minima, quo consequuntur nemo praesentium ducimus. Deleniti molestiae odit voluptatem possimus natus?</p>
+
+<%- include("templates/footer.ejs") %>

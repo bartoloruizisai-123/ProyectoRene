@@ -1,0 +1,44 @@
+<%- include("templates/header.ejs", {titulo: "Productos"}) %>
+<div class="container my-4">
+    <h2 class="text-center mb-4">Catálogo de Productos</h2>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% productosBD.forEach((producto)=>{ %>
+            <div class="col">
+                <div class="card h-100">
+                    <!-- imagen removed -->
+                    <div class="card-body">
+                        <h5 class="card-title"><%= producto.nombre %></h5>
+                        <p class="card-text"><%= producto.descripcion %></p>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Precio: $<%= producto.precio %></h6>
+                            <span class="badge bg-<%= producto.stock > 0 ? 'success' : 'danger' %>">
+                                Stock: <%= producto.stock %>
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="btn-group">
+                                <a href="/editarProducto/<%= producto._id %>" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                <a href="/borrarProducto/<%= producto._id %>" class="btn btn-sm btn-outline-danger" 
+                                   onclick="return confirm('¿Estás seguro de eliminar este producto?')">Borrar</a>
+                            </div>
+                            <% if (producto.stock > 0) { %>
+                                <form action="/comprarProducto" method="POST" class="d-flex align-items-center">
+                                    <input type="hidden" name="id" value="<%= producto._id %>">
+                                    <input type="number" name="cantidad" value="1" min="1" max="<%= producto.stock %>" 
+                                           class="form-control form-control-sm me-2" style="width: 60px">
+                                    <button type="submit" class="btn btn-sm btn-primary">Comprar</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="/nuevoProducto" class="btn btn-success">Agregar Nuevo Producto</a>
+    </div>
+</div>
+<%- include("templates/footer.ejs") %>

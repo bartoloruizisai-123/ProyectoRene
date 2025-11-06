@@ -1,0 +1,28 @@
+<%- include("templates/header.ejs", {titulo: "Tienda de Ropa"}) %>
+<div class="container my-4">
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold text-primary mb-4">Bienvenido a nuestra Tienda</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Descubre nuestra colección de ropa y accesorios para toda la familia.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="/productos" class="btn btn-primary btn-lg px-4 gap-3">Ver Productos</a>
+                <a href="/nuevoProducto" class="btn btn-outline-secondary btn-lg px-4">Agregar Producto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-4">
+        <% categorias.forEach((categoria) => { %>
+            <div class="col">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= categoria %></h5>
+                        <p class="card-text">Explora nuestra colección de <%= categoria.toLowerCase() %>.</p>
+                        <a href="/productos?categoria=<%= categoria %>" class="btn btn-outline-primary">Ver <%= categoria %></a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+<%- include("templates/footer.ejs") %>
